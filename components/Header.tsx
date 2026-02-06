@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ brandName, accentColor, onAdminToggle, 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="flex items-center hover:opacity-80 transition-opacity"
           >
-            <img src="/logo.png" alt={brandName} className="h-[4.25rem] w-auto object-contain" />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt={brandName} className="h-[4.25rem] w-auto object-contain" />
           </button>
         </div>
 

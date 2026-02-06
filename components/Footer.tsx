@@ -12,7 +12,7 @@ const Footer: React.FC<FooterProps> = ({ brandName, accentColor }) => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
           <div className="space-y-6">
-            <img src="/logo.png" alt={brandName} className="h-10 w-auto object-contain opacity-90 hover:opacity-100" />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt={brandName} className="h-10 w-auto object-contain opacity-90 hover:opacity-100" />
             <p className="text-gray-500 text-sm leading-relaxed font-medium">
               자웃자는 당신의 창의적인 방송 생활을 지원합니다. 최고의 휴대용 오디오 장비로 어디서나 프로페셔널한 스튜디오를 경험하세요.
             </p>
