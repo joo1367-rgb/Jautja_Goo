@@ -148,7 +148,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                     <div className="flex gap-6">
                       <div className="w-24 h-24 rounded-2xl overflow-hidden bg-white shrink-0 shadow-sm">
-                        <img src={product.imageUrl} className="w-full h-full object-cover" alt={product.name} />
+                        <img src={product.imageUrl.startsWith('http') ? product.imageUrl : `${import.meta.env.BASE_URL}${product.imageUrl}`} className="w-full h-full object-cover" alt={product.name} />
                       </div>
                       <div className="flex-1 space-y-3">
                         <input

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "blog1",
+    "title": "야외 방송의 완성, 자웃자 인터페이스 활용법",
+    "source": "Kbanker",
+    "date": "2024-02-01",
+    "excerpt": "야외 방송이나 라이브 스트리밍에서 사운드를 더 잘 잡기 위한 노하우를 소개합니다. 자웃자 인터페이스를 사용하는 다양한 팁과 활용 방법을 상세하게 설명합니다.",
+    "url": "https://www.kbanker.co.kr/news/articleView.html?idxno=212883",
+    "imageUrl": "/images/blogs/blog1.jpg"
+  },
+  {
+    "id": "blog2",
+    "title": "오디오 인터페이스 설정으로 음질 개선하기",
+    "source": "IT-B",
+    "date": "2022.05.31",
+    "excerpt": "버퍼 사이즈나 샘플레이트 설정을 조절하면 녹음 음질이 크게 향상됩니다. 인터페이스 설정의 기본 원리와 실전 팁을 안내합니다.",
+    "url": "https://www.it-b.co.kr/news/articleView.html?idxno=59992",
+    "imageUrl": "/images/blogs/blog2.jpg"
+  }
+]

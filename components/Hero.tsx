@@ -1,12 +1,17 @@
 import React from 'react';
+import { useTranslation } from '../i18n/LanguageContext';
 
 interface HeroProps {
   accentColor: string;
 }
 
 const Hero: React.FC<HeroProps> = ({ accentColor }) => {
+  const { t } = useTranslation();
+  const description = (t('home.hero.description') as string) || '';
+  const lines = description.split('\n');
+
   return (
-    <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#1a1a1a] pt-20">
+    <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#1a1a1a]">
       <div className="absolute inset-0 z-0">
         <img
           src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&q=80&w=1920"
@@ -33,9 +38,12 @@ const Hero: React.FC<HeroProps> = ({ accentColor }) => {
         </div>
 
         <p className="text-base md:text-lg text-white/90 leading-relaxed mb-10 font-normal">
-          어디에도 없는 휴대용 오디오 인터페이스부터 방송용 이어폰, 고급 마이크까지
-          <br />
-          자웃자는 당신의 스튜디오를 위한 가장 완벽한 피스(Piece)를 제공합니다.
+          {lines.map((line, i) => (
+            <React.Fragment key={i}>
+              {line}
+              {i < lines.length - 1 && <br />}
+            </React.Fragment>
+          ))}
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -44,13 +52,13 @@ const Hero: React.FC<HeroProps> = ({ accentColor }) => {
             className="px-8 py-4 text-white rounded-full font-bold text-sm transition-all hover:opacity-90 hover:scale-[1.02]"
             style={{ backgroundColor: accentColor }}
           >
-            제품 라인업 확인
+            {t('home.hero.ctaProduct') as string}
           </a>
           <a
-            href="#blog"
+            href="#media"
             className="px-8 py-4 rounded-full font-bold text-sm border-2 border-white/70 text-white transition-all hover:bg-white/10 hover:scale-[1.02]"
           >
-            신제품 런칭 소식
+            {t('home.hero.ctaNews') as string}
           </a>
         </div>
       </div>

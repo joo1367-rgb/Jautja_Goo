@@ -1,5 +1,10 @@
 import React from 'react';
-import { Menu, ShoppingBag, Search, User } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu } from 'lucide-react';
+import { useTranslation } from '../i18n/LanguageContext';
+
+const NAVER_STORE_URL = 'https://smartstore.naver.com/jautja_official';
+const AMAZON_STORE_URL = 'https://www.amazon.com/stores/JAUTJA'; // 실제 Amazon 스토어 URL로 변경 가능
 
 interface HeaderProps {
   brandName: string;
@@ -8,7 +13,16 @@ interface HeaderProps {
   isAdmin: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ brandName, accentColor, onAdminToggle, isAdmin }) => {
+const Header: React.FC<HeaderProps> = ({ brandName, accentColor }) => {
+  const location = useLocation();
+  const { lang, setLang, t } = useTranslation();
+
+  const navItems = [
+    { label: t('menu.about') as string, path: '/about' },
+    { label: t('menu.shop') as string, path: '/shop' },
+    { label: t('menu.media') as string, path: '/blog' },
+  ];
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
@@ -17,38 +31,66 @@ const Header: React.FC<HeaderProps> = ({ brandName, accentColor, onAdminToggle, 
         </button>
 
         <div className="flex-1 flex justify-center lg:justify-start">
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex items-center hover:opacity-80 transition-opacity"
-          >
-            <img src={`${import.meta.env.BASE_URL}logo.png`} alt={brandName} className="h-[4.25rem] w-auto object-contain" />
-          </button>
+          <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
+            <img
+              src={`${import.meta.env.BASE_URL}logo.png`}
+              alt={brandName}
+              className="h-[4.25rem] w-auto object-contain"
+            />
+          </Link>
         </div>
 
         <nav className="hidden lg:flex items-center space-x-12 absolute left-1/2 -translate-x-1/2">
-          {['HOME', 'SHOP', 'BLOG', 'ABOUT'].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className="text-sm font-bold tracking-widest text-gray-400 hover:text-black transition-colors"
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`text-sm font-bold tracking-widest transition-colors ${
+                location.pathname === item.path ? 'text-black' : 'text-gray-400 hover:text-black'
+              }`}
             >
-              {item}
-            </a>
+              {item.label}
+            </Link>
           ))}
         </nav>
 
-        <div className="flex-1 flex items-center justify-end space-x-6">
-          <button className="p-2 hover:opacity-70 transition-colors" style={{ color: accentColor }}><Search className="w-5 h-5" /></button>
-          <button className="p-2 hover:opacity-70 transition-colors relative" style={{ color: accentColor }}>
-            <ShoppingBag className="w-5 h-5" />
-            <span className="absolute top-0 right-0 w-2.5 h-2.5 rounded-full border-2 border-white" style={{ backgroundColor: accentColor }}></span>
+        <div className="flex-1 flex items-center justify-end gap-3 flex-wrap">
+          <a
+            href={NAVER_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center px-3 py-1.5 text-xs font-bold tracking-wider rounded border border-gray-200 text-gray-600 hover:border-gray-300 hover:text-gray-900 hover:bg-gray-50 transition-colors"
+          >
+            {t('menu.naverStore') as string}
+          </a>
+          <a
+            href={AMAZON_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center px-3 py-1.5 text-xs font-bold tracking-wider rounded border border-gray-200 text-gray-600 hover:border-gray-300 hover:text-gray-900 hover:bg-gray-50 transition-colors"
+          >
+            {t('menu.amazon') as string}
+          </a>
+          <span className="hidden sm:block w-px h-4 bg-gray-200 self-center" aria-hidden />
+          <button
+            type="button"
+            onClick={() => setLang('ko')}
+            className={`px-3 py-1.5 text-xs font-bold tracking-widest rounded transition-colors ${
+              lang === 'ko' ? 'text-white' : 'text-gray-400 hover:text-gray-700'
+            }`}
+            style={{ backgroundColor: lang === 'ko' ? accentColor : 'transparent' }}
+          >
+            KR
           </button>
           <button
-            onClick={onAdminToggle}
-            className={`p-2 rounded-full transition-all ${isAdmin ? 'text-white shadow-lg' : 'hover:bg-gray-50'}`}
-            style={{ backgroundColor: isAdmin ? accentColor : 'transparent', color: isAdmin ? 'white' : accentColor }}
+            type="button"
+            onClick={() => setLang('en')}
+            className={`px-3 py-1.5 text-xs font-bold tracking-widest rounded transition-colors ${
+              lang === 'en' ? 'text-white' : 'text-gray-400 hover:text-gray-700'
+            }`}
+            style={{ backgroundColor: lang === 'en' ? accentColor : 'transparent' }}
           >
-            <User className="w-5 h-5" />
+            EN
           </button>
         </div>
       </div>

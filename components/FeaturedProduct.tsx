@@ -27,7 +27,7 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = ({ product, accentColor 
             ></div>
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-square lg:aspect-[4/3] bg-gray-50 border border-gray-100">
               <img
-                src={product.imageUrl}
+                src={product.imageUrl.startsWith('http') ? product.imageUrl : `${import.meta.env.BASE_URL}${product.imageUrl}`}
                 alt={product.name}
                 className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
               />
